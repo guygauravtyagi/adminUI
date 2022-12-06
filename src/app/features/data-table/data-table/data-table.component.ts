@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-data-table',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent {
-
+  @Input() data!: any[];
+  @ContentChild('headers') headers!: TemplateRef<any>;
+  @ContentChild('rows') rows!: TemplateRef<any>;
+  
 }

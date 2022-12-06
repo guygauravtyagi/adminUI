@@ -10,6 +10,9 @@ import { DataTableComponent } from './data-table/data-table.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    DataTableComponent
   ]
 })
 export class DataTableModule { }
