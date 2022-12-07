@@ -1,21 +1,4 @@
-<app-data-table *ngIf="members" [data]="members">
-    <ng-template #headers>
-        <th><input type="checkbox"></th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Action</th>
-    </ng-template>
-    <ng-template #rows let-row>
-        <td><input type="checkbox"></td>
-        <td>{{row.name}}</td>
-        <td>{{row.email}}</td>
-        <td>{{row.role}}</td>
-        <td>
-            <button>Hello</button>
-        </td>
-    </ng-template>
-</app-data-table>
+<app-pagination [paginationData]="members" ></app-pagination>
 
 <div>
     <app-button></app-button>
