@@ -1,4 +1,4 @@
-<app-data-table *ngIf="paginationData" [data]="paginationData">
+<app-data-table *ngIf="visibleList" [data]="visibleList">
     <ng-template #headers>
         <th><input type="checkbox"></th>
         <th>Name</th>

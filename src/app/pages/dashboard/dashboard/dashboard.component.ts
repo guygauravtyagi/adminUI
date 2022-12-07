@@ -12,6 +12,7 @@ export class DashboardComponent {
 
   public members$!: Observable<Member[]>;
   public members!: Member[];
+  public pageNumber = 1;
 
   constructor(private mainService: MainService) {
     this.members$ = this.mainService.getData()
