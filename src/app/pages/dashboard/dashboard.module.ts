@@ -11,6 +11,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 import { PaginationModule } from "./../../features/pagination/pagination.module";
 
+/**
+ * It was smooth, faced no issues yet
+ */
+
 
 const routes: Routes = [
   {

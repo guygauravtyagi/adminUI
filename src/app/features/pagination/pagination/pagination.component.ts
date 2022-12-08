@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Member } from 'src/app/common/data-models/members';
 
 @Component({
   selector: 'app-pagination',
@@ -7,14 +8,14 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 })
 export class PaginationComponent implements OnChanges {
 
-  @Input() paginationData!: any[];
+  @Input() paginationData!: Member[];
   @Input() rowsPerPage = 10;
   @Input() pageNumber = 1;
 
-  @Output() globalSelectionEvent: EventEmitter<any[]> = new EventEmitter<any[]>();
-  @Output() valueSelectionEvent: EventEmitter<any[]> = new EventEmitter<any[]>();
+  @Output() selectionEvent: EventEmitter<Member[]> = new EventEmitter<Member[]>();
 
   visibleList: any[] = [];
+  globalSelection = false;
 
   constructor() {
   }
@@ -30,8 +31,19 @@ export class PaginationComponent implements OnChanges {
     this.visibleList = pageData.filter((ele, index) => index < (pageNumber * rowsPerPage) && index >= ((pageNumber - 1) * rowsPerPage));
   }
 
-  globalClicked(event: Event) {
-    this.globalSelectionEvent.emit();
+  globalClicked() {
+    this.globalSelection = !this.globalSelection;
+    this.visibleList.forEach(ele => {
+      ele.isSelected = this.globalSelection;
+    });
+    this.selectionEvent.emit(this.visibleList);
+  }
+
+  itemClicked(item: Member) {
+    this.globalSelection = false;
+    item.isSelected = !item.isSelected;
+    if (this.visibleList.reduce((isTrue, item) => isTrue && item.isSelected, true)) this.globalSelection = true;
+    this.selectionEvent.emit(this.visibleList);
   }
 
 }

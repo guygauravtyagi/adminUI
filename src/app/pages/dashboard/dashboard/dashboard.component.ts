@@ -19,7 +19,12 @@ export class DashboardComponent {
     this.members$.subscribe(
       (data) => {
         this.members = data;
+        this.members.map((ele) => ele.isSelected = false)
       }
     );
+  }
+
+  elementSelected(event: Member[]) {
+    console.log(event);
   }
 }
