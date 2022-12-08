@@ -4,4 +4,5 @@ export interface Member {
     email: string;
     role: string;
     isSelected?: boolean;
+    enableEditing?: boolean;
 }

@@ -1,4 +1,5 @@
-<app-pagination [paginationData]="members" [rowsPerPage]="10" [pageNumber]="pageNumber" (selectionEvent)="elementSelected($event)"></app-pagination>
+<app-pagination [paginationData]="members" [rowsPerPage]="10" [pageNumber]="pageNumber"
+    (selectionEvent)="elementSelected($event)" (deleteItemEvent)="elementDeleted($event)" (editItemEvent)="elementEdited($event)"></app-pagination>
 
 <div>
     <app-button></app-button>

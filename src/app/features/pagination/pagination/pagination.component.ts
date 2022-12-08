@@ -13,6 +13,8 @@ export class PaginationComponent implements OnChanges {
   @Input() pageNumber = 1;
 
   @Output() selectionEvent: EventEmitter<Member[]> = new EventEmitter<Member[]>();
+  @Output() deleteItemEvent: EventEmitter<Member> = new EventEmitter<Member>();
+  @Output() editItemEvent: EventEmitter<Member> = new EventEmitter<Member>();
 
   visibleList: any[] = [];
   globalSelection = false;
@@ -44,6 +46,15 @@ export class PaginationComponent implements OnChanges {
     item.isSelected = !item.isSelected;
     if (this.visibleList.reduce((isTrue, item) => isTrue && item.isSelected, true)) this.globalSelection = true;
     this.selectionEvent.emit(this.visibleList);
+  }
+
+  deleteItems(item: Member) {
+    this.deleteItemEvent.emit(item);
+  }
+
+  editItems(item: Member) {
+    item.enableEditing = !item.enableEditing;
+    this.editItemEvent.emit(item);
   }
 
 }
