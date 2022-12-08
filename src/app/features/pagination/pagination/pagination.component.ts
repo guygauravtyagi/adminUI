@@ -30,4 +30,8 @@ export class PaginationComponent implements OnChanges {
     this.visibleList = pageData.filter((ele, index) => index < (pageNumber * rowsPerPage) && index >= ((pageNumber - 1) * rowsPerPage));
   }
 
+  globalClicked(event: Event) {
+    this.globalSelectionEvent.emit();
+  }
+
 }

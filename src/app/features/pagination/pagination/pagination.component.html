@@ -1,6 +1,6 @@
 <app-data-table *ngIf="visibleList" [data]="visibleList">
     <ng-template #headers>
-        <th><input type="checkbox"></th>
+        <th><input type="checkbox" (click)="globalClicked($event)"></th>
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
