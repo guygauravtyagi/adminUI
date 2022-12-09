@@ -1,1 +1,2 @@
-<p>round-button works!</p>
+<input type="button" class="round-button" [ngClass]="isDisabled ? 'disable-button' : isActive ? 'active-button' : ''"
+    [value]="buttonName" (click)="buttonPress($event)">

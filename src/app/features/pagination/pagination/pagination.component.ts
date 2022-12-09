@@ -15,6 +15,7 @@ export class PaginationComponent implements OnChanges {
   @Output() selectionEvent: EventEmitter<Member[]> = new EventEmitter<Member[]>();
   @Output() deleteItemEvent: EventEmitter<Member> = new EventEmitter<Member>();
   @Output() editItemEvent: EventEmitter<Member> = new EventEmitter<Member>();
+  @Output() pageCount: EventEmitter<number> = new EventEmitter<number>();
 
   visibleList: any[] = [];
   globalSelection = false;
@@ -31,6 +32,7 @@ export class PaginationComponent implements OnChanges {
 
   setVisibleList(pageData: any[], pageNumber: number, rowsPerPage: number) {
     this.visibleList = pageData.filter((ele, index) => index < (pageNumber * rowsPerPage) && index >= ((pageNumber - 1) * rowsPerPage));
+    this.boradCastPages();
   }
 
   globalClicked() {
@@ -55,6 +57,10 @@ export class PaginationComponent implements OnChanges {
   editItems(item: Member) {
     item.enableEditing = !item.enableEditing;
     this.editItemEvent.emit(item);
+  }
+
+  boradCastPages() {
+    this.pageCount.emit(Math.ceil(this.paginationData.length/this.rowsPerPage));
   }
 
 }

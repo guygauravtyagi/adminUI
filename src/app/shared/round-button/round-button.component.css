@@ -1,0 +1,22 @@
+.round-button {
+    height: 46px;
+    width: 46px;
+    border-radius: 25px;
+    border: 2px solid #008cff;
+    outline: none;
+    color: white;
+    background-color: #008cff;
+    font-size: 20px;
+}
+
+.active-button {
+    background-color: white;
+    color: black;
+}
+
+.disable-button {
+    background-color: #dadada;
+    color: #b6b6b6;
+    border: 2px solid #b6b6b6;
+    pointer-events: none;
+}
