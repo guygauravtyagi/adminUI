@@ -6,3 +6,9 @@ export interface Member {
     isSelected?: boolean;
     enableEditing?: boolean;
 }
+
+export interface ButtonType {
+    id: number;
+    name: string;
+    value: number;
+}

@@ -1,7 +1,8 @@
 <app-pagination [paginationData]="members" [rowsPerPage]="10" [pageNumber]="pageNumber"
-    (selectionEvent)="elementSelected($event)" (deleteItemEvent)="elementDeleted($event)" (editItemEvent)="elementEdited($event)"></app-pagination>
+    (selectionEvent)="elementSelected($event)" (deleteItemEvent)="elementDeleted($event)" (editItemEvent)="elementEdited($event)"
+    (pageCount)="setPaginationButton($event)"></app-pagination>
 
 <div>
     <app-button></app-button>
-    <app-round-button></app-round-button>
+    <app-round-button *ngFor="let button of buttonArray" [buttonName]="button.name"></app-round-button>
 </div>

@@ -7,15 +7,15 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 })
 export class RoundButtonComponent implements OnChanges {
 
-  @Input() buttonName = 0;
+  @Input() buttonName = '0';
   @Input() isDisabled = false;
   @Input() isActive = false;
 
   @Output() buttonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isDisabled = changes['isDisabled'].currentValue;
-    this.isActive = changes['isActive'].currentValue;
+    this.isDisabled = changes['isDisabled']?.currentValue;
+    this.isActive = changes['isActive']?.currentValue;
   }
 
   buttonPress(event: Event) {
