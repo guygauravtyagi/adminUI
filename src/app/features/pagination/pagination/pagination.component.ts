@@ -24,7 +24,7 @@ export class PaginationComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.paginationData = changes['paginationData'].currentValue;
+    if (changes['paginationData']) this.paginationData = changes['paginationData'].currentValue;
     if (changes['rowsPerPage']?.currentValue) this.rowsPerPage = changes['rowsPerPage'].currentValue;
     if (changes['pageNumber']?.currentValue) this.pageNumber = changes['pageNumber'].currentValue;
     if (this.paginationData && this.paginationData.length > 0) this.setVisibleList(this.paginationData, this.pageNumber, this.rowsPerPage);
@@ -60,7 +60,7 @@ export class PaginationComponent implements OnChanges {
   }
 
   boradCastPages() {
-    this.pageCount.emit(Math.ceil(this.paginationData.length/this.rowsPerPage));
+    this.pageCount.emit(Math.ceil(this.paginationData.length / this.rowsPerPage));
   }
 
 }

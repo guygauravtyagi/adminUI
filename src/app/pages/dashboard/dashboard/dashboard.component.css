@@ -1,0 +1,24 @@
+.button-holder {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-button-holder {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-button-holder {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    width: 75%;
+    justify-content: left;
+    align-items: center;
+}

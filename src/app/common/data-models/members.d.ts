@@ -11,4 +11,6 @@ export interface ButtonType {
     id: number;
     name: string;
     value: number;
+    isActive: boolean;
+    isDisabled: boolean;
 }

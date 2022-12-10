@@ -14,6 +14,8 @@ export class DashboardComponent {
   public members!: Member[];
   public pageNumber = 1;
   public buttonArray: ButtonType[] = [];
+  //Incase you want to set limit to the number of buttons use this var
+  public buttonLimit = 10;
 
   constructor(private mainService: MainService) {
     this.members$ = this.mainService.getData()
@@ -28,6 +30,20 @@ export class DashboardComponent {
     );
   }
 
+  setActiveButton(value: number) {
+    this.buttonArray.forEach(ele => {
+      if(value !== 0 && ele.id === (value - 1)) ele.isActive = true;
+      else ele.isActive = false;
+    });
+  }
+
+  setDisabledButtons(pageNumber: number) {
+    this.buttonArray.forEach(ele => {
+      if(pageNumber === 1 && (ele.id === -1 || ele.id === -2))  ele.isDisabled = true;
+      else if(pageNumber === (this.buttonArray.length - 4) && (ele.id === -3 || ele.id === -4)) ele.isDisabled = true;
+    });
+  }
+
   elementSelected(event: Member[]) {
     console.log(event);
   }
@@ -40,16 +56,30 @@ export class DashboardComponent {
     console.log(event);
   }
 
+  gotToPage(button: ButtonType) {
+    if(button.id >= 0)this.pageNumber = button.id + 1;
+    else if(button.id === -1) this.pageNumber = 1;
+    else if(button.id === -2) this.pageNumber = this.pageNumber - 1;
+    else if(button.id === -3) this.pageNumber = this.pageNumber + 1;
+    else if(button.id === -4) this.pageNumber = this.buttonArray.length -4;
+  }
+
   setPaginationButton(event: number) {
+    this.buttonArray.length = 0;
     this.setDefaultButton(this.buttonArray, true);
     for (let index = 0; index < event; index++) {
+      if(index < this.buttonLimit)
       this.buttonArray.push({
         id: index,
         name: JSON.stringify(index+1),
-        value: index
+        value: index,
+        isActive: false,
+        isDisabled: false,
       });      
     }
     this.setDefaultButton(this.buttonArray, false);
+    this.setActiveButton(this.pageNumber);
+    this.setDisabledButtons(this.pageNumber);
   }
 
   setDefaultButton(buttons: ButtonType[], isFront: boolean) {
@@ -57,23 +87,31 @@ export class DashboardComponent {
       buttons.push({
         id: -1,
         name: '<<',
-        value: 0
+        value: 0,
+        isActive: false,
+        isDisabled: false,
       });
       buttons.push({
         id: -2,
         name: '<',
-        value: 0
+        value: 0,
+        isActive: false,
+        isDisabled: false,
       });
     } else {
       buttons.push({
         id: -3,
-        name: '>>',
-        value: 0
+        name: '>',
+        value: 0,
+        isActive: false,
+        isDisabled: false,
       });
       buttons.push({
         id: -4,
-        name: '>',
-        value: 0
+        name: '>>',
+        value: 0,
+        isActive: false,
+        isDisabled: false,
       });
     }
   }
