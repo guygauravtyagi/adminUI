@@ -27,7 +27,7 @@ export class PaginationComponent implements OnChanges {
     if (changes['paginationData']) this.paginationData = changes['paginationData'].currentValue;
     if (changes['rowsPerPage']?.currentValue) this.rowsPerPage = changes['rowsPerPage'].currentValue;
     if (changes['pageNumber']?.currentValue) this.pageNumber = changes['pageNumber'].currentValue;
-    if (this.paginationData && this.paginationData.length > 0) this.setVisibleList(this.paginationData, this.pageNumber, this.rowsPerPage);
+    if (this.paginationData) this.setVisibleList(this.paginationData, this.pageNumber, this.rowsPerPage);
   }
 
   setVisibleList(pageData: any[], pageNumber: number, rowsPerPage: number) {
