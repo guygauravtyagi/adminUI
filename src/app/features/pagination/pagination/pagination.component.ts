@@ -62,8 +62,6 @@ export class PaginationComponent implements OnChanges {
   editItems(item: Member) {
     this.formSubmitted = true;
     if (this.isNameValid() && this.isEmaliValid() && this.isRoleValid()) {
-      this.editItemObj.id = item.id;
-      this.editItemObj.isSelected = item.isSelected;
       this.editItemObj.enableEditing = false;
       this.editItemEvent.emit(this.editItemObj);
       this.editItemObj = this.getEditItemsdefault();
@@ -74,6 +72,11 @@ export class PaginationComponent implements OnChanges {
   discardChanges(item: Member) {
     this.toggleEdit(item);
     this.editItemObj = this.getEditItemsdefault();
+  }
+
+  editClicked(item: Member) {
+    this.toggleEdit(item);
+    this.editItemObj = item;
   }
 
   isEmaliValid() {

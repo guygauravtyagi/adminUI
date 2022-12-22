@@ -24,7 +24,7 @@
             <p class="error" *ngIf="formSubmitted && !isRoleValid()">*Please add valid Role</p>
         </td>
         <td class="button-holder" *ngIf="!row.enableEditing">
-            <app-icon-button [imageSrc]="'./../../../assets/icons/edit.png'" [title]="'Edit'" (buttonClick)="toggleEdit(row)"></app-icon-button>
+            <app-icon-button [imageSrc]="'./../../../assets/icons/edit.png'" [title]="'Edit'" (buttonClick)="editClicked(row)"></app-icon-button>
             <app-icon-button [imageSrc]="'./../../../assets/icons/remove.png'" [title]="'Delete'" (buttonClick)="deleteItems(row)"></app-icon-button>
         </td>
         <td class="button-holder" *ngIf="row.enableEditing">
