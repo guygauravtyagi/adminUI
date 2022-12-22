@@ -10,3 +10,28 @@ td {
     padding: 25px;
     text-align: center;
 }
+
+input {
+    padding: 4px;
+}
+
+.button-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.error-input {
+    border: 1px solid red;
+}
+
+.error {
+    font-size: 10px;
+    color: red;
+}
+
+app-icon-button {
+    height: 25px;
+    width: 25px;
+}

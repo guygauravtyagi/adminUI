@@ -4,7 +4,7 @@
 
 <div class="button-holder">
     <div class="delete-button-holder">
-        <app-button [name]="'Delete selected'"></app-button>
+        <app-button [name]="'Delete selected'" (clickButton)="deleteSelected($event)"></app-button>
     </div>
     <div class="page-button-holder">
         <app-round-button *ngFor="let button of buttonArray" [buttonName]="button.name" [isActive]="button.isActive"

@@ -57,6 +57,12 @@ export class DashboardComponent {
     })
   }
 
+  deleteSelected(event: Event) {
+    this.selectedMembers.forEach(ele => {
+      this.elementDeleted(ele);
+    })
+  }
+
   gotToPage(button: ButtonType) {
     if (button.id >= 0) this.pageNumber = button.id + 1;
     else if (button.id === -1) this.pageNumber = 1;

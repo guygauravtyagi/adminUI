@@ -20,11 +20,16 @@ export class PaginationComponent implements OnChanges {
   visibleList: any[] = [];
   globalSelection = false;
   editItemObj: Member = this.getEditItemsdefault();
+  formSubmitted = false;
   constructor() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['paginationData']) this.paginationData = changes['paginationData'].currentValue;
+    if (changes['paginationData']) {
+      this.paginationData = changes['paginationData'].currentValue;
+      // setting global selection to false forcefully for bulk delete
+      this.globalSelection = false;
+    }
     if (changes['rowsPerPage']?.currentValue) this.rowsPerPage = changes['rowsPerPage'].currentValue;
     if (changes['pageNumber']?.currentValue) this.pageNumber = changes['pageNumber'].currentValue;
     if (this.paginationData) this.setVisibleList(this.paginationData, this.pageNumber, this.rowsPerPage);
@@ -40,14 +45,14 @@ export class PaginationComponent implements OnChanges {
     this.visibleList.forEach(ele => {
       ele.isSelected = this.globalSelection;
     });
-    this.selectionEvent.emit(this.visibleList);
+    this.selectionEvent.emit(this.visibleList.filter(ele => ele.isSelected));
   }
 
   itemClicked(item: Member) {
     this.globalSelection = false;
     item.isSelected = !item.isSelected;
     if (this.visibleList.reduce((isTrue, item) => isTrue && item.isSelected, true)) this.globalSelection = true;
-    this.selectionEvent.emit(this.visibleList);
+    this.selectionEvent.emit(this.visibleList.filter(ele => ele.isSelected));
   }
 
   deleteItems(item: Member) {
@@ -55,16 +60,32 @@ export class PaginationComponent implements OnChanges {
   }
 
   editItems(item: Member) {
-    this.editItemObj.id = item.id;
-    this.editItemObj.isSelected = item.isSelected;
-    this.editItemObj.enableEditing = false;
-    this.editItemEvent.emit(this.editItemObj);
-    this.editItemObj = this.getEditItemsdefault();
+    this.formSubmitted = true;
+    if (this.isNameValid() && this.isEmaliValid() && this.isRoleValid()) {
+      this.editItemObj.id = item.id;
+      this.editItemObj.isSelected = item.isSelected;
+      this.editItemObj.enableEditing = false;
+      this.editItemEvent.emit(this.editItemObj);
+      this.editItemObj = this.getEditItemsdefault();
+      this.formSubmitted = false;
+    }
   }
 
   discardChanges(item: Member) {
     this.toggleEdit(item);
     this.editItemObj = this.getEditItemsdefault();
+  }
+
+  isEmaliValid() {
+    return this.editItemObj.email && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.editItemObj.email) ? true : false;
+  }
+
+  isNameValid() {
+    return this.editItemObj.name && this.editItemObj.name.length > 2 ? true : false;
+  }
+
+  isRoleValid() {
+    return this.editItemObj.role && (this.editItemObj.role === 'member' || this.editItemObj.role === 'admin') ? true : false;
   }
 
   getEditItemsdefault(): Member {

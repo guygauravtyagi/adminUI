@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class IconButtonComponent {
 
   @Input() imageSrc = './../../../assets/icons/edit.png';
+  @Input() title = 'image';
   @Output() buttonClick: EventEmitter<Event> = new EventEmitter<Event>();
 
   emitClick(event: Event) {
