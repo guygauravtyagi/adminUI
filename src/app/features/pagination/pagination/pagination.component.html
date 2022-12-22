@@ -11,12 +11,16 @@
         <td *ngIf="!row.enableEditing">{{row.name}}</td>
         <td *ngIf="!row.enableEditing">{{row.email}}</td>
         <td *ngIf="!row.enableEditing">{{row.role}}</td>
-        <td *ngIf="row.enableEditing"><input type="text"></td>
-        <td *ngIf="row.enableEditing"><input type="text"></td>
-        <td *ngIf="row.enableEditing"><input type="text"></td>
-        <td>
-            <app-icon-button [imageSrc]="'./../../../assets/icons/edit.png'" (buttonClick)="editItems(row)"></app-icon-button>
+        <td *ngIf="row.enableEditing"><input type="text" [(ngModel)]="editItemObj.name"></td>
+        <td *ngIf="row.enableEditing"><input type="text" [(ngModel)]="editItemObj.email"></td>
+        <td *ngIf="row.enableEditing"><input type="text" [(ngModel)]="editItemObj.role"></td>
+        <td *ngIf="!row.enableEditing">
+            <app-icon-button [imageSrc]="'./../../../assets/icons/edit.png'" (buttonClick)="toggleEdit(row)"></app-icon-button>
             <app-icon-button [imageSrc]="'./../../../assets/icons/remove.png'" (buttonClick)="deleteItems(row)"></app-icon-button>
+        </td>
+        <td *ngIf="row.enableEditing">
+            <app-icon-button [imageSrc]="'./../../../assets/icons/edit.png'" (buttonClick)="editItems(row)"></app-icon-button>
+            <app-icon-button [imageSrc]="'./../../../assets/icons/remove.png'" (buttonClick)="discardChanges(row)"></app-icon-button>
         </td>
     </ng-template>
 </app-data-table>

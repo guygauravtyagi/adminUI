@@ -51,7 +51,10 @@ export class DashboardComponent {
   }
 
   elementEdited(event: Member) {
-    console.log(event);
+    this.members = this.members.map((ele: Member) => {
+      if(event.id === ele.id) ele = event;
+      return ele;
+    })
   }
 
   gotToPage(button: ButtonType) {

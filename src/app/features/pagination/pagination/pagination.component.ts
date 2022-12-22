@@ -19,7 +19,7 @@ export class PaginationComponent implements OnChanges {
 
   visibleList: any[] = [];
   globalSelection = false;
-
+  editItemObj: Member = this.getEditItemsdefault();
   constructor() {
   }
 
@@ -32,7 +32,7 @@ export class PaginationComponent implements OnChanges {
 
   setVisibleList(pageData: any[], pageNumber: number, rowsPerPage: number) {
     this.visibleList = pageData.filter((ele, index) => index < (pageNumber * rowsPerPage) && index >= ((pageNumber - 1) * rowsPerPage));
-    this.boradCastPages();
+    this.broadCastPages();
   }
 
   globalClicked() {
@@ -55,11 +55,32 @@ export class PaginationComponent implements OnChanges {
   }
 
   editItems(item: Member) {
-    item.enableEditing = !item.enableEditing;
-    this.editItemEvent.emit(item);
+    this.editItemObj.id = item.id;
+    this.editItemObj.isSelected = item.isSelected;
+    this.editItemObj.enableEditing = false;
+    this.editItemEvent.emit(this.editItemObj);
+    this.editItemObj = this.getEditItemsdefault();
   }
 
-  boradCastPages() {
+  discardChanges(item: Member) {
+    this.toggleEdit(item);
+    this.editItemObj = this.getEditItemsdefault();
+  }
+
+  getEditItemsdefault(): Member {
+    return {
+      id: '',
+      name: '',
+      email: '',
+      role: ''
+    };
+  }
+
+  toggleEdit(item: Member) {
+    item.enableEditing = !item.enableEditing;
+  }
+
+  broadCastPages() {
     this.pageCount.emit(Math.ceil(this.paginationData.length / this.rowsPerPage));
   }
 
