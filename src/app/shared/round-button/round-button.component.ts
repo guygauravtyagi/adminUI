@@ -20,7 +20,6 @@ export class RoundButtonComponent implements OnChanges {
 
   buttonPress(event: Event) {
     this.buttonClicked.emit(event);
-    console.log('Hello');
   }
 
 }

@@ -1,4 +1,4 @@
-<app-pagination [paginationData]="members" [rowsPerPage]="10" [pageNumber]="pageNumber"
+<app-pagination [paginationData]="members" [rowsPerPage]="rowsPerPage" [pageNumber]="pageNumber"
     (selectionEvent)="elementSelected($event)" (deleteItemEvent)="elementDeleted($event)"
     (editItemEvent)="elementEdited($event)" (pageCount)="setPaginationButton($event)"></app-pagination>
 

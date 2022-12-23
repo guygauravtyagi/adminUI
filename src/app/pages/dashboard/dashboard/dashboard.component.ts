@@ -12,11 +12,14 @@ export class DashboardComponent {
 
   public members$!: Observable<Member[]>;
   public members!: Member[];
+  public rowsPerPage = 10;
   public pageNumber = 1;
   public buttonArray: ButtonType[] = [];
   public selectedMembers: Member[] = [];
   //Incase you want to set limit to the number of buttons use this var
   public buttonLimit = 10;
+  public pageCount = 0;
+  public markDirty = false;
 
   constructor(private mainService: MainService) {
     this.members$ = this.mainService.getData()
@@ -60,7 +63,20 @@ export class DashboardComponent {
   deleteSelected(event: Event) {
     this.selectedMembers.forEach(ele => {
       this.elementDeleted(ele);
-    })
+    });
+    /**
+     * update page number when last page is deleted
+     */
+    if(this.markDirty && (this.pageNumber === (this.buttonArray.length - 4))) {
+      this.markDirty = false;
+      this.gotToPage({
+        id: -2,
+        name: '<',
+        value: 0,
+        isActive: false,
+        isDisabled: false,
+      });
+    }
   }
 
   gotToPage(button: ButtonType) {
@@ -73,6 +89,7 @@ export class DashboardComponent {
 
   setPaginationButton(event: number) {
     this.buttonArray.length = 0;
+    if(this.pageCount !== event) this.markDirty = true;
     this.setDefaultButton(this.buttonArray, true);
     for (let index = 0; index < event; index++) {
       if (index < this.buttonLimit)
