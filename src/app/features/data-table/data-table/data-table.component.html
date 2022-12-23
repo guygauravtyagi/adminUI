@@ -1,4 +1,4 @@
-<table class="table-data">
+<table *ngIf="data" class="table-data">
     <thead>
         <tr>
             <ng-container *ngTemplateOutlet=" headers || defaultHeaderTemplate; context: { $implicit: data}">

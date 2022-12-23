@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { DataTableModule } from '../../data-table/data-table.module';
 
 import { PaginationComponent } from './pagination.component';
 
@@ -8,6 +10,10 @@ describe('PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[
+        SharedModule,
+        DataTableModule
+      ],
       declarations: [ PaginationComponent ]
     })
     .compileComponents();
